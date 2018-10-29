@@ -1,0 +1,11 @@
+version: '2'
+services:
+  edward:
+    build: .
+    image: edward:1.0
+    container_name: edward
+    tty: true
+    volumes:
+      -  ../results/:/edward/public/data
+    ports:
+      - "8080:3000"

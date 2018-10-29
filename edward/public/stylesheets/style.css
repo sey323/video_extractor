@@ -6,3 +6,25 @@ body {
 a {
   color: #00B7FF;
 }
+
+/* 学習途中の画像の調整 */
+img.lrn-img{
+  width: 40vw;
+  margin: 50px;
+}
+
+/* 生成された画像の表示 */
+img.gen-img{
+  height: 20%;
+  margin: 50px auto;
+}
+div.single-char{
+  text-align: center;
+}
+
+.card{
+    color:white;
+    background:rgba(0, 0, 0, 0.34);
+    padding:1rem;
+    z-index: 100;
+}

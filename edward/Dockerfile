@@ -10,4 +10,4 @@ RUN npm install
 # ポート3000番を開放する
 EXPOSE 3000
 
-CMD node server.js
+CMD node app.js
