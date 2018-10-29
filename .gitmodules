@@ -1,0 +1,3 @@
+[submodule "venders/yolo_tensor"]
+	path = venders/yolo_tensor
+	url = https://github.com/gliese581gg/YOLO_tensorflow.git
