@@ -3,9 +3,10 @@ var router = express.Router();
 
 const fs = require('fs');
 const url = require('url');
+const csvSync = require('csv-parse/lib/sync'); // requiring sync module
 
-var PATH = "/edward/public/data/";
-//var PATH = "../results/";
+var PATH = "../results/";
+//var PATH = "/edward/public/data/";
 
 
 // トップページのルーティング
@@ -47,10 +48,15 @@ router.get('/*.result', function (request, response) {
         r_imgPath = PATH + "/" + file;
         r_imgPath = imgPath.replace("/edward/public","") + "/" + file
         frame = file.slice(0,-4)
+
+        // 出力ファイルから写っている物体を検出
+        let paramPath = imgPath.replace("/edward/public","").replace("img" , "param") + "/" + file.slice(0,-4) + ".txt"
+        let csvParam = fs.readFileSync(paramPath);
+      
         imgData = {
           path:r_imgPath,
           frame:frame,
-          object:1
+          object:csvParam
         }
         images.push( imgData );
       }
