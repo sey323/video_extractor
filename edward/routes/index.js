@@ -6,7 +6,7 @@ const url = require('url');
 const csvSync = require('csv-parse/lib/sync'); // requiring sync module
 
 var PATH = "../results/";
-//var PATH = "/edward/public/data/";
+var PATH = "/edward/public/data/";
 
 
 // トップページのルーティング
@@ -50,9 +50,9 @@ router.get('/*.result', function (request, response) {
         frame = file.slice(0,-4)
 
         // 出力ファイルから写っている物体を検出
-        let paramPath = imgPath.replace("/edward/public","").replace("img" , "param") + "/" + file.slice(0,-4) + ".txt"
+        let paramPath = imgPath.replace("img" , "param") + "/" + file.slice(0,-4) + ".txt"
         let csvParam = fs.readFileSync(paramPath);
-      
+
         imgData = {
           path:r_imgPath,
           frame:frame,
