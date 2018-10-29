@@ -20,9 +20,10 @@ def cut_and_detect( FLAGS , cut_dct , detect_ai):
     frame_ultima = np.zeros((*picsize[::-1], 3)) # create empty image
 
     # 保存するディレクトリが存在するか確認する．
-    if FLAGS.save_path and not os.path.exists(os.path.join(FLAGS.save_path,"img")):
-        os.makedirs(os.path.join(FLAGS.save_path,"img"))
-        os.makedirs(os.path.join(FLAGS.save_path,"param"))
+    save_folders = "results/"+ FLAGS.save_path
+    if save_folders and not os.path.exists(os.path.join(save_folders,"img")):
+        os.makedirs(os.path.join(save_folders,"img"))
+        os.makedirs(os.path.join(save_folders,"param"))
 
     # 1秒ごとに画像を処理する．
     for frame in MovieIter(FLAGS.movie_file, None , interval = FLAGS.interval):
@@ -39,8 +40,8 @@ def cut_and_detect( FLAGS , cut_dct , detect_ai):
         # シーンの検出
         if cut_dct(frame_ultima,frame_penult)>=FLAGS.thres: #閾値よりMAEが大きい場合、カットと判定
             print("Cut detected!: frame {}".format(frame_cnt))
-            save_img_path = "{}/img/{}.jpg".format(FLAGS.save_path,frame_cnt)
-            save_param_path = "{}/param/{}.txt".format(FLAGS.save_path,frame_cnt)
+            save_img_path = "results/{}/img/{}.jpg".format(FLAGS.save_path,frame_cnt)
+            save_param_path = "results/{}/param/{}.txt".format(FLAGS.save_path,frame_cnt)
             detect_ai(img = frame_ultima , tofile_img = save_img_path , tofile_txt=save_param_path)
 
         frame_cnt+=1
