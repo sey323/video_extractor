@@ -2,8 +2,10 @@ import os,sys
 import cv2
 import numpy as np
 
-sys.path.append('./cut')
+sys.path.append('./opt')
 from movie import MovieIter
+
+sys.path.append('./cut')
 import scene_dct
 
 sys.path.append('./venders/yolo_tensor')
@@ -42,6 +44,7 @@ def cut_and_detect( movie_file , cut_dct , detect_ai):
 
         frame_cnt+=1
 
+
 def main(movie_file):
     # YOLOディテクターの検出
     yolo = YOLO_TF('venders/yolo_tensor/weights/YOLO_small.ckpt')
@@ -49,7 +52,7 @@ def main(movie_file):
 
     # 検出関数の定義
     cut_dct = scene_dct.MAE
-    cut_and_detect(cut_dct,detect_ai)
+    cut_and_detect(movie_file,cut_dct,detect_ai)
 
 
 if __name__ == "__main__":
