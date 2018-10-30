@@ -1,3 +1,6 @@
 [submodule "venders/yolo_tensor"]
 	path = venders/yolo_tensor
 	url = https://github.com/gliese581gg/YOLO_tensorflow.git
+[submodule "venders/darkflow"]
+	path = venders/darkflow
+	url = https://github.com/thtrieu/darkflow.git
