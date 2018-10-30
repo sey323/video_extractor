@@ -2,3 +2,4 @@ tensorflow
 numpy
 cython
 opencv-python
+matplotlib

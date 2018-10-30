@@ -4,3 +4,6 @@
 [submodule "venders/darkflow"]
 	path = venders/darkflow
 	url = https://github.com/thtrieu/darkflow.git
+[submodule "venders/keras-yolo3"]
+	path = venders/keras-yolo3
+	url = https://github.com/qqwweee/keras-yolo3.git
