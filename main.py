@@ -9,8 +9,12 @@ from movie import MovieIter
 sys.path.append('./cut')
 import scene_dct
 
-sys.path.append('./venders/yolo_tensor')
+sys.path.append('./models/YOLO_small')
 from YOLO_small_tf import YOLO_TF
+sys.path.append('./models/yolo9000')
+from YOLO9000 import YOLO9000
+sys.path.append('./models/YOLOv3')
+from yolo import YOLO
 
 
 def cut_and_detect( FLAGS , cut_dct , detect_ai):
@@ -26,30 +30,25 @@ def cut_and_detect( FLAGS , cut_dct , detect_ai):
         os.makedirs(os.path.join(save_folders,"param"))
 
     # 1秒ごとに画像を処理する．
-    for frame in MovieIter(FLAGS.movie_file, None , interval = FLAGS.interval):
+    for frame in MovieIter(FLAGS.movie_path, None , interval = FLAGS.interval):
         frame_penult = frame_ultima
         frame_ultima = cv2.resize(frame, picsize, interpolation=cv2.INTER_AREA) #指定サイズに縮小
-
-        '''
-        cv2.imshow(WINNAME, frame)
-        key = cv2.waitKey(1) # quit when esc-key pressed
-        if key == ESC_KEY:
-            break
-        '''
 
         # シーンの検出
         if cut_dct(frame_ultima,frame_penult)>=FLAGS.thres: #閾値よりMAEが大きい場合、カットと判定
             print("Cut detected!: frame {}".format(frame_cnt))
             save_img_path = "results/{}/img/{}.jpg".format(FLAGS.save_path,frame_cnt)
             save_param_path = "results/{}/param/{}.txt".format(FLAGS.save_path,frame_cnt)
-            detect_ai(img = frame_ultima , tofile_img = save_img_path , tofile_txt=save_param_path)
+            detect_ai(frame_ultima , tofile_img = save_img_path , tofile_txt=save_param_path)
 
         frame_cnt+=1
 
 
 def main(FLAGS):
     # YOLOディテクターの検出
-    yolo = YOLO_TF('venders/yolo_tensor/weights/YOLO_small.ckpt')
+    #yolo = YOLO_TF()
+    #yolo = YOLO9000()
+    yolo = YOLO()
     detect_ai = yolo.detect_from_cvmat
 
     # 検出関数の定義
@@ -61,7 +60,7 @@ if __name__ == "__main__":
     FLAGS = flags.FLAGS
 
     # 実行するGANモデルの指定．
-    flags.DEFINE_string('movie_file', '', '変換する画像.')
+    flags.DEFINE_string('movie_path', '', '変換する画像.')
     flags.DEFINE_string('save_path', 'test', '生成した画像を保存するディレクトリ．')
 
     flags.DEFINE_float('thres', 55.55679398148148, '閾値．')
