@@ -103,3 +103,9 @@ ENV/
 *results/
 *jpg
 src/
+
+*.weights
+*.h5
+*.ckpt
+*cfg*
+*.txt
