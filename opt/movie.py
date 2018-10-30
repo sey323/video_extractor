@@ -21,4 +21,4 @@ class MovieIter(object): #動画のフレームを返すイテレータ
     def __del__(self): # anyway it works without destructor
         self.org.release()
 
-    
+        
