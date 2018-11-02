@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Class definition of YOLO_v3 style detection model on image and video
 """
@@ -133,7 +132,7 @@ class YOLO(object):
         font = ImageFont.truetype(font='venders/keras-yolo3/font/FiraMono-Medium.otf',
                     size=np.floor(3e-2 * image.size[1] + 0.5).astype('int32'))
         thickness = (image.size[0] + image.size[1]) // 300
-
+        dect_objects = ''
         for i, c in reversed(list(enumerate(out_classes))):
             predicted_class = self.class_names[c]
             box = out_boxes[i]
@@ -149,6 +148,7 @@ class YOLO(object):
             bottom = min(image.size[1], np.floor(bottom + 0.5).astype('int32'))
             right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
             print(label, (left, top), (right, bottom))
+            dect_objects += "{},({},{}),({},{})".format(label, left, top, right, bottom)
 
             if top - label_size[1] >= 0:
                 text_origin = np.array([left, top - label_size[1]])
@@ -170,6 +170,8 @@ class YOLO(object):
         print(end - start)
         import cv2
         cv2.imwrite(tofile_img, np.asarray(image)[..., ::-1])
+        with open(tofile_txt, mode='w', encoding='utf-8') as f:
+            f.write(dect_objects )
         return image
 
     def close_session(self):
