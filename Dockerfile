@@ -15,8 +15,8 @@ RUN cd ~/tmp/opencv-3.1.0 && cmake CMakeLists.txt -DWITH_TBB=ON \
 RUN cd ~/tmp/opencv-3.1.0 && make -j2 && make install
 
 # 関連ライブラリのインストール
-ADD requirement.txt .
-RUN pip install -r requirement.txt
+ADD requirements.txt .
+RUN pip install -r requirements.txt
 
 # Darkflowのインストール
 RUN cd ~/tmp && git clone https://github.com/thtrieu/darkflow.git
@@ -26,3 +26,5 @@ RUN cd ~/tmp/darkflow && pip install .
 ENV APP_NAME venom
 WORKDIR /home/$APP_NAME
 ADD . /home/$APP_NAME
+
+CMD ["bash"]

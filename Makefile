@@ -1,6 +1,7 @@
 NAME=venom
 
 run:
+	git submodule update --init --recursive
 	docker build -t ${NAME}:1.0 .
 
 stop:
