@@ -10,6 +10,7 @@ class Dumper:
         self.begin = '<table class="table table-responsive">'
         self.end = '</table>'
         self.content = ''
+        self.no = 1
 
     def add_scene(self,frame,time,param_path ):
         '''
@@ -23,12 +24,14 @@ class Dumper:
             param_data = f.read()
         self.content += '<tr class="col-md-12">\n \
                             <td class="col-md-1">{0}</td>\n \
+                            <td class="col-md-1">{1}</td>\n \
                             <td class="col-md-5">\n  \
-                                <img class="gen-img" src="{1}">\n \
+                                <img class="gen-img" src="{2}">\n \
                             </td>\n \
-                            <td class="col-md-4">{2}</td>\n \
+                            <td class="col-md-4">{3}</td>\n \
                             <td class="col-md-2"></td>\n \
-                        </tr>'.format(time,"img/"+str(frame)+".jpg",param_data)
+                        </tr>'.format(self.no, time,"img/"+str(frame)+".jpg",param_data)
+        self.no += 1
 
     def save_html( self , save_path ):
         '''
