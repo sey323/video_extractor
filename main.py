@@ -46,11 +46,12 @@ def cut_and_detect( FLAGS , cut_dct , detect_ai):
 
         # シーンの検出
         if cut_dct(frame_ultima,frame_penult)>=FLAGS.thres: #閾値よりMAEが大きい場合、カットと判定
-            print("Cut detected!: frame {}".format(time))
+            formatted_time = "{:0>2}:{:0>2}".format(int(time/60),time%60)
+            print("Cut detected!: time {}".format(formatted_time))
             save_img_path = "results/{}/img/{}.jpg".format(FLAGS.save_path,frame_cnt)
             save_param_path = "results/{}/param/{}.txt".format(FLAGS.save_path,frame_cnt)
             detect_ai(frame_ultima , tofile_img = save_img_path , tofile_txt=save_param_path)
-            HTML_dumper.add_scene(frame_cnt,save_param_path)
+            HTML_dumper.add_scene(frame_cnt,formatted_time,save_param_path)
 
         frame_cnt+=1
 

@@ -11,7 +11,7 @@ class Dumper:
         self.end = '</table>'
         self.content = ''
 
-    def add_scene(self,frame,param_path ):
+    def add_scene(self,frame,time,param_path ):
         '''
         フレームごとのHTML構文を追加する．
          Parameters
@@ -28,7 +28,7 @@ class Dumper:
                             </td>\n \
                             <td class="col-md-4">{2}</td>\n \
                             <td class="col-md-2"></td>\n \
-                        </tr>'.format(frame,"img/"+str(frame)+".jpg",param_data)
+                        </tr>'.format(time,"img/"+str(frame)+".jpg",param_data)
 
     def save_html( self , save_path ):
         '''
