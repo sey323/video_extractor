@@ -109,4 +109,4 @@ src/
 *.ckpt
 *cfg*
 *.txt
-!requirement.txt
+!requirements.txt
