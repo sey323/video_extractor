@@ -40,14 +40,13 @@ def cut_and_detect( FLAGS , cut_dct , detect_ai):
         os.makedirs(os.path.join(save_folders,"param"))
 
     # 1秒ごとに画像を処理する．
-    for frame in MovieIter(FLAGS.movie_path, None , interval = FLAGS.interval):
+    for frame , time in MovieIter(FLAGS.movie_path, None ):
         frame_penult = frame_ultima
         frame_ultima = cv2.resize(frame, picsize, interpolation=cv2.INTER_AREA) #指定サイズに縮小
 
         # シーンの検出
         if cut_dct(frame_ultima,frame_penult)>=FLAGS.thres: #閾値よりMAEが大きい場合、カットと判定
-            print("Cut detected!: frame {}".format(frame_cnt))
-            calc_second = frame_cnt * FLAGS.interval
+            print("Cut detected!: frame {}".format(time))
             save_img_path = "results/{}/img/{}.jpg".format(FLAGS.save_path,frame_cnt)
             save_param_path = "results/{}/param/{}.txt".format(FLAGS.save_path,frame_cnt)
             detect_ai(frame_ultima , tofile_img = save_img_path , tofile_txt=save_param_path)
@@ -80,6 +79,5 @@ if __name__ == "__main__":
     flags.DEFINE_string('save_path', 'test', '生成した画像を保存するディレクトリ．')
 
     flags.DEFINE_float('thres', 55.55679398148148, '閾値．')
-    flags.DEFINE_float('interval', 1.0, '画像を切り抜く最小単位．')
 
     main(FLAGS)
