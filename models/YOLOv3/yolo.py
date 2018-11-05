@@ -147,7 +147,8 @@ class YOLO(object):
             left = max(0, np.floor(left + 0.5).astype('int32'))
             bottom = min(image.size[1], np.floor(bottom + 0.5).astype('int32'))
             right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
-            dect_objects += "{},({},{}),({},{})<br>".format(label, left, top, right, bottom)
+            #dect_objects += "{},({},{}),({},{})<br>".format(label, left, top, right, bottom)
+            dect_objects += "{},<br>".format(label)
 
             if top - label_size[1] >= 0:
                 text_origin = np.array([left, top - label_size[1]])
