@@ -6,3 +6,4 @@ tensorflow
 keras
 opencv-python
 pytube
+openpyxl
