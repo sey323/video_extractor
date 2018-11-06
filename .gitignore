@@ -100,13 +100,15 @@ ENV/
 # mypy
 .mypy_cache/
 
-*results/
 *jpg
-src/
 
 *.weights
 *.h5
 *.ckpt
 *cfg*
 *.txt
+*.html
+*.xlsx
+*.m4v
+*.mp4
 !requirements.txt
