@@ -58,7 +58,7 @@ def cut_and_detect( FLAGS , cut_dct , detect_ai , img_size = [240,135]):
             # 画像のリサイズ処理
             img = cv2.imread(save_img_path, cv2.IMREAD_COLOR)
             resize = (img_size[0],img_size[1])
-            half_img = cv2.resize(img, resize, interpolation=cv2.INTER_AREA)
+            half_img = cv2.resize(frame_ultima, resize, interpolation=cv2.INTER_AREA)
             cv2.imwrite(save_half_img_path, half_img)
 
             HTML_dumper.add_scene(frame_cnt,formatted_time,save_param_path)
