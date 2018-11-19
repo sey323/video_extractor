@@ -90,5 +90,11 @@ if __name__ == "__main__":
     flags.DEFINE_string('save_path', 'test', '生成した画像を保存するディレクトリ．')
 
     flags.DEFINE_float('thres', 55.55679398148148, '閾値．')
+    '''
+    thres
+    ------------
+    祭り動画:55
+    料理動画:15
+    '''
 
     main(FLAGS)
