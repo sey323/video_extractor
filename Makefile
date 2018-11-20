@@ -8,4 +8,7 @@ stop:
 	docker rm -f ${NAME}
 
 in:
-	docker run -v `pwd`/results:/home/${NAME}/results -v `pwd`/src:/home/${NAME}/src --name ${NAME} -it ${NAME}:1.0  /bin/bash
+	docker run --rm -v `pwd`/results:/home/${NAME}/results -v `pwd`/src:/home/${NAME}/src --name ${NAME} -it ${NAME}:1.0  /bin/bash
+
+in_win:
+	docker run --rm -v ./results/:/home/${NAME}/results -v ./src/:/home/${NAME}/src --name ${NAME} -it ${NAME}:1.0 /bin/bash
