@@ -7,3 +7,4 @@ keras
 opencv-python
 pytube
 openpyxl
+flask
