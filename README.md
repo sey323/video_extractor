@@ -1,4 +1,4 @@
-# **V**isual **E**xtractor, **NO**t need I extract from **M**ovie (VENOM)
+# **V**isual **E**xtractor, **NO** **M**iru (VENOM)
 
 ## Usage
 ### セットアップ
