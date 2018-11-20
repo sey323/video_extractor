@@ -16,7 +16,6 @@ from yolo import YOLO
 
 import module
 
-
 # 動画分析API
 @api.route('/', methods=['GET'])
 def get_movie_analy():
@@ -35,10 +34,6 @@ def get_movie_analy():
     if 'thres' in params:
         thres =  params.get('thres')
 
-    # 物体認識モデルの定義
-    yolo = YOLO()
-    detect_ai = yolo.detect_from_cvmat
-    cut_dct = scene_dct.MAE
     module.cut_and_detect(movie_path,cut_dct,detect_ai,save_path=save_path,thres=int(thres))
 
     return make_response(save_path)
@@ -49,4 +44,9 @@ def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 if __name__ == '__main__':
+    # 物体認識モデルの定義
+    yolo = YOLO()
+    detect_ai = yolo.detect_from_cvmat
+    cut_dct = scene_dct.MAE
+
     api.run(host='0.0.0.0', port=3000)
