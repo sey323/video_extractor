@@ -39,7 +39,7 @@ def get_movie_analy():
     yolo = YOLO()
     detect_ai = yolo.detect_from_cvmat
     cut_dct = scene_dct.MSE
-    module.cut_and_detect(movie_path,cut_dct,detect_ai,save_path=save_path,thres=thres)
+    module.cut_and_detect(movie_path,cut_dct,detect_ai,save_path=save_path,thres=int(thres))
 
     return make_response(save_path)
 
