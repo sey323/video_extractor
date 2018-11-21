@@ -72,7 +72,7 @@ def main():
     yolo = YOLO()
     detect_ai = yolo.detect_from_cvmat
     # 検出関数の定義
-    cut_dct = scene_dct.MSE
+    cut_dct = scene_dct.MAE
 
     cut_and_detect(format_lines[0],format_lines[1],int(format_lines[2]),cut_dct,detect_ai)
 
