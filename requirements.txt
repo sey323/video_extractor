@@ -8,3 +8,5 @@ opencv-python
 pytube
 openpyxl
 flask
+slackbot
+requests
