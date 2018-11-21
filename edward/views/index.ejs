@@ -18,6 +18,13 @@
 
 </head>
 <body>
+  <section id="command-area">
+    <input type="text" id="moveUrl" required autofocus autocomplete='false'/>
+    <form id="cutMovie" action="/" method="GET">
+		<button type="submit" value="cutMovie" onclick="cutMovie()">This is wrong!!</button>
+	  </form>
+
+  </section>
   <div class="learn-field container">
     <h1 class"col-md-12">結果</h1>
     <% imgFolders.forEach(function(imgItem) { %>
@@ -34,4 +41,17 @@
   <% }); %>
   </div>
 </body>
+<script>
+function cutMovie(){
+  $.ajax({
+    url: "/python",
+    data: { value: "a" },
+    type: "post",
+    success: (data) => {
+      console.log(data);
+        // outputs "SUCESSSSS"
+    }
+  });
+}
+</script>
 </html>

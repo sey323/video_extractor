@@ -1,3 +1,5 @@
+
+var bodyParser = require('body-parser');
 var express = require('express');
 var router = express.Router();
 
@@ -6,7 +8,33 @@ const url = require('url');
 const csvSync = require('csv-parse/lib/sync'); // requiring sync module
 
 var PATH = "../results/";
-var PATH = "/edward/public/data/";
+//var PATH = "/edward/public/data/";
+
+var runPython = function(moveUrl,save_path,thres) {
+  const {PythonShell} = require('python-shell');
+  var pyshell = new PythonShell('../node_module.py');
+
+  pyshell.send(moveUrl+','+save_path+','+thres);
+
+  pyshell.on('message', function (message) {
+    // received a message sent from the Python script (a simple "print" statement)
+    console.log(message);
+  });
+
+  // end the input stream and allow the process to exit
+  pyshell.end(function (err,code,signal) {
+    if (err) throw err;
+    console.log('The exit code was: ' + code);
+    console.log('The exit signal was: ' + signal);
+  });
+}
+
+// getting post request
+router.post('/python', (req, res) => {
+  res.send(res.body);
+  console.log(res.body);
+  runPython('https://www.youtube.com/watch?v=lcmgAaEpDh8','thres','50');
+});
 
 
 // トップページのルーティング
