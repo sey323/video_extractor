@@ -11,7 +11,7 @@ from slackbot.bot import default_reply
 
 import requests
 import re
-
+import slackbot_settings
 
 # @respond_to('string')     bot宛のメッセージ
 #                           stringは正規表現が可能 「r'string'」
@@ -33,12 +33,30 @@ import re
 # 物体認識モデルの定義
 
 # 動画読み込みの開始
-@listen_to(r'^venom,(.*)$')
-@listen_to(r'^v,(.*)$')
-def start_venom( message , dics ):
-    message.reply('実行中')
+@respond_to(r'^venom,(.*)')
+@listen_to(r'^venom,(.*)')
+@respond_to(r'^v,(.*)')
+@listen_to(r'^v,(.*)')
+def start_venom( message , args ):
+    args = args.replace("<", "").replace(">", "").split(',')
 
+    # 入力から引数を決定
+    if len(args)==1:
+        thres = 50
+    else:
+        thres = args[1]
+
+    movie_path = args[0]
+
+    message.reply('閾値'+str(thres)+'で実行中')
+    print(slackbot_settings.API_TOKEN)
     response = requests.get(
         'http://0.0.0.0:3000/',
-        params={'movie_path': dics })
+        params={'movie_path': movie_path ,
+                'thres':thres,
+                'save_path':'api'})
+
+    files = {'file': open('results/api/result.xlsx', 'rb')}
+    param = {'token':slackbot_settings.API_TOKEN, 'channels':'video'}
+    res = requests.post(url="https://slack.com/api/files.upload",params=param, files=files)
     message.reply( 'できたよ' )

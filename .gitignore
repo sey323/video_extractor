@@ -101,6 +101,7 @@ ENV/
 .mypy_cache/
 
 *jpg
+results/
 
 *.weights
 *.h5

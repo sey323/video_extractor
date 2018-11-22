@@ -48,5 +48,4 @@ if __name__ == '__main__':
     yolo = YOLO()
     detect_ai = yolo.detect_from_cvmat
     cut_dct = scene_dct.MAE
-
     api.run(host='0.0.0.0', port=3000)
