@@ -60,3 +60,24 @@ def start_venom( message , args ):
     param = {'token':slackbot_settings.API_TOKEN, 'channels':'video'}
     res = requests.post(url="https://slack.com/api/files.upload",params=param, files=files)
     message.reply( 'できたよ' )
+
+# ヘルプ
+@listen_to(r'^help$')
+@respond_to(r'^help$')
+@listen_to(r'^h$')
+@respond_to(r'^h$')
+def helper(message):
+    help_message = '>>> \
+    使い方 \n\
+    ●コマンド\n \
+    `v,{yotubeの動画のURL},{閾値}` \n \
+    \tyoutubeの動画を閾値で切り抜き \n \
+    ●閾値について \n \
+    範囲:0.00~100.00 \n\
+    閾値が小さい：画面の少しの変化でカットする．\n\
+    閾値が大きい：画面の大きな変化でカットする．\n\
+    料理動画：15〜25 \n\
+    観光動画：50〜60 \n\
+    ※検証中なので参考までに'
+
+    message.reply(help_message)
