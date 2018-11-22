@@ -6,7 +6,7 @@ tensorflow
 keras
 opencv-python
 pytube
-openpyxl
+openpyxl==2.5.9
 flask
 slackbot
 requests
