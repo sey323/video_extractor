@@ -27,7 +27,7 @@ def main(FLAGS):
     detect_ai = yolo.detect_from_cvmat
 
     # 検出関数の定義
-    cut_dct = scene_dct.MAE
+    cut_dct = scene_dct.MAE_block
     module.cut_and_detect(FLAGS.movie_path,cut_dct,detect_ai,FLAGS.save_path,FLAGS.thres)
 
 if __name__ == "__main__":
