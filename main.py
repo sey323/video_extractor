@@ -3,11 +3,11 @@ import cv2
 import numpy as np
 import tensorflow as tf
 
-sys.path.append('./opt')
+sys.path.append('./src/opt')
 from movie import MovieIter
 from dump import Dumper
 
-sys.path.append('./cut')
+sys.path.append('./src/cut')
 import scene_dct
 
 sys.path.append('./models/YOLO_small')
@@ -17,6 +17,7 @@ from YOLO9000 import YOLO9000
 sys.path.append('./models/YOLOv3')
 from yolo import YOLO
 
+sys.path.append('./src')
 import module
 
 def main(FLAGS):

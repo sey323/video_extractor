@@ -11,8 +11,8 @@ class MovieIter(object): #動画のフレームを返すイテレータ
             self.org = cv2.VideoCapture(moviefile)
         else:#MP4がないときはYoutubeからダウンロード
             print('[Download]\tDownloadMovie')
-            self.youtube_downloader(moviefile,'./src')
-            dnld_movie_path = self.get_latest_modified_file_path('./src/')
+            self.youtube_downloader(moviefile,'./resources')
+            dnld_movie_path = self.get_latest_modified_file_path('./resources/')
             self.org = cv2.VideoCapture(dnld_movie_path)
 
         self.framecnt = 0

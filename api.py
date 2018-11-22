@@ -4,16 +4,17 @@ from flask import Flask, request,jsonify, abort, make_response
 api = Flask(__name__)
 
 # 自作関数の読み込み
-sys.path.append('./opt')
+sys.path.append('./src/opt')
 from movie import MovieIter
 from dump import Dumper
 
-sys.path.append('./cut')
+sys.path.append('./src/cut')
 import scene_dct
 
 sys.path.append('./models/YOLOv3')
 from yolo import YOLO
 
+sys.path.append('./src')
 import module
 
 # 動画分析API
