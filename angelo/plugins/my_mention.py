@@ -47,6 +47,8 @@ def start_venom( message , args ):
         thres = args[1]
 
     movie_path = args[0]
+    now = datetime.now().strftime("%Y-%m-%d-%H%M%S")
+    save_path = 'api/' + now
 
     message.reply('閾値'+str(thres)+'で実行中')
     print(slackbot_settings.API_TOKEN)
@@ -54,7 +56,7 @@ def start_venom( message , args ):
         'http://0.0.0.0:3000/',
         params={'movie_path': movie_path ,
                 'thres':thres,
-                'save_path':'api'})
+                'save_path':save_path})
 
     files = {'file': open('results/api/result.xlsx', 'rb')}
     param = {'token':slackbot_settings.API_TOKEN, 'channels':'video'}

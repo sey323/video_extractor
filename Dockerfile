@@ -31,4 +31,4 @@ COPY ./src ./src
 COPY main.py .
 COPY api.py .
 
-CMD ["bash"]
+CMD [ "python", "./api.py" ]
