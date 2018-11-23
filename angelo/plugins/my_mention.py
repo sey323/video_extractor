@@ -51,14 +51,13 @@ def start_venom( message , args ):
     save_path = 'api/' + now
 
     message.reply('閾値'+str(thres)+'で実行中')
-    print(slackbot_settings.API_TOKEN)
     response = requests.get(
-        'http://0.0.0.0:3000/',
+        'http://venom:3000/',
         params={'movie_path': movie_path ,
                 'thres':thres,
                 'save_path':save_path})
 
-    files = {'file': open('results/api/result.xlsx', 'rb')}
+    files = {'file': open('results/'+save_path+'/result.xlsx', 'rb')}
     param = {'token':slackbot_settings.API_TOKEN, 'channels':'video'}
     res = requests.post(url="https://slack.com/api/files.upload",params=param, files=files)
     message.reply( 'できたよ' )

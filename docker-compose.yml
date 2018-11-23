@@ -2,13 +2,17 @@ version: '2'
 services:
   venom:
     build: .
+    container_name: venom
     ports:
       - "3000:3000"
     volumes:
       - ./resources:/home/venom/resources
       - ./results:/home/venom/results
-    restart: always
 
   angelo:
     build: ./angelo/.
-    restart: always
+    container_name: angelo
+    links:
+      - "venom"
+    volumes:
+      - ./results:/home/angelo/results
