@@ -5,7 +5,8 @@ build:
 	docker build -t ${NAME}:1.0 .
 
 run:
-	docker run -d --rm -v `pwd`/results:/home/${NAME}/results -v `pwd`/src:/home/${NAME}/src -p 3000:3000 --name ${NAME} -it ${NAME}:1.0 python api.py
+	python api.py &
+	docker run -d --rm -v `pwd`/results:/home/${NAME}/results -v `pwd`/src:/home/${NAME}/src --name ${NAME} -it ${NAME}:1.0 python angelo/run.py
 
 stop:
 	docker rm -f ${NAME}
