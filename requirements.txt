@@ -8,5 +8,3 @@ opencv-python
 pytube
 openpyxl==2.5.9
 flask
-slackbot
-requests
