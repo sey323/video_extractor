@@ -25,6 +25,10 @@ RUN cd ~/tmp/darkflow && pip install .
 # 実行環境の準備
 ENV APP_NAME venom
 WORKDIR /home/$APP_NAME
-ADD . /home/$APP_NAME
+COPY ./venders ./venders
+COPY ./models ./models
+COPY ./src ./src
+COPY main.py .
+COPY api.py .
 
 CMD ["bash"]
