@@ -38,12 +38,16 @@ def cut_and_detect( movie_path, cut_dct , detect_ai ,save_path,thres , img_size 
         os.makedirs(os.path.join(save_folders,"param"))
 
     # 1秒ごとに画像を処理する．
+    frame_penult = None
     for frame , time in MovieIter(movie_path, None ):
-        frame_penult = frame_ultima
+        if frame_penult is None:
+            frame_penult = frame_ultima
         frame_ultima = cv2.resize(frame, picsize, interpolation=cv2.INTER_AREA) #指定サイズに縮小
 
         # シーンの検出
         if cut_dct(frame_ultima,frame_penult)>=thres: #閾値よりMAEが大きい場合、カットと判定
+            frame_penult = frame_ultima
+
             formatted_time = "{:0>2}:{:0>2}".format(int(time/60),time%60)
             print("Cut detected!: time {}".format(formatted_time))
             # 保存先の名前の設定
