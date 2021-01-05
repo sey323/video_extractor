@@ -8,11 +8,3 @@ services:
     volumes:
       - ./resources:/home/video-yolo/resources
       - ./results:/home/video-yolo/results
-
-  slack-client:
-    build: ./slack-client/.
-    container_name: slack-client
-    links:
-      - "video-yolo"
-    volumes:
-      - ./results:/home/slack-client/results

@@ -1,2 +1,0 @@
-slackbot
-requests
