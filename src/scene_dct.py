@@ -24,7 +24,6 @@ def MAE_HSV(now, prev):  # mean absolute error
 def MAE_block(now, prev, picsize=(16, 9)):  # mean absolute error
     now_r = cv2.resize(now, picsize, interpolation=cv2.INTER_AREA)  # 指定サイズに縮小
     prev_r = cv2.resize(prev, picsize, interpolation=cv2.INTER_AREA)
-    print(prev_r.shape)
     diff = now_r.astype(np.int) - prev_r.astype(np.int)
 
     return np.mean(np.abs(diff))
