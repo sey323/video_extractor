@@ -1,4 +1,5 @@
-NAME=venom
+API_SERVER_NAME=video-yolo
+SLACK_CLIENT_NAME=slack-client
 
 build:
 	git submodule update --init --recursive
@@ -8,8 +9,8 @@ run:
 	docker-compose up -d
 
 stop:
-	docker stop ${NAME} angelo
-	docker rm -f ${NAME} angelo
+	docker stop ${API_SERVER_NAME} ${SLACK_CLIENT_NAME}
+	docker rm -f ${API_SERVER_NAME} ${SLACK_CLIENT_NAME}
 
 in:
-	docker exec --name ${NAME} -it ${NAME}:1.0 /bin/bash
+	docker exec --name ${API_SERVER_NAME} -it ${API_SERVER_NAME}:1.0 /bin/bash

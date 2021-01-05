@@ -112,4 +112,9 @@ results/
 *.xlsx
 *.m4v
 *.mp4
+*.webm
 !requirements.txt
+
+# vscode
+.vscode
+.DS_Store

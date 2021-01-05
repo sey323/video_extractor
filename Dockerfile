@@ -1,29 +1,23 @@
 FROM python:3.6
 
-RUN apt-get update -y && apt-get install -yq make cmake gcc g++ unzip wget build-essential gcc zlib1g-dev
-
-# Opencvのインストール
-RUN ln -s /usr/include/libv4l1-videodev.h /usr/include/linux/videodev.h
-
-RUN mkdir ~/tmp
-RUN cd ~/tmp && wget https://github.com/Itseez/opencv/archive/3.1.0.zip && unzip 3.1.0.zip
-RUN cd ~/tmp/opencv-3.1.0 && cmake CMakeLists.txt -DWITH_TBB=ON \
-                                                  -DINSTALL_CREATE_DISTRIB=ON \
-                                                  -DWITH_FFMPEG=OFF \
-                                                  -DWITH_IPP=OFF \
-                                                  -DCMAKE_INSTALL_PREFIX=/usr/local
-RUN cd ~/tmp/opencv-3.1.0 && make -j2 && make install
+# opencv-devのインストール
+RUN apt-get update -y && apt-get install -y libopencv-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # 関連ライブラリのインストール
-ADD requirements.txt .
-RUN pip install -r requirements.txt
+COPY requirements.txt .
+RUN pip install --upgrade pip \
+    && pip install -r requirements.txt
 
 # Darkflowのインストール
-RUN cd ~/tmp && git clone https://github.com/thtrieu/darkflow.git
-RUN cd ~/tmp/darkflow && pip install .
+RUN mkdir -p ~/tmp && cd ~/tmp \
+    && git clone https://github.com/thtrieu/darkflow.git \
+    && pip install ./darkflow \
+    && rm -r ~/tmp/darkflow
 
 # 実行環境の準備
-ENV APP_NAME venom
+ENV APP_NAME video-yolo
 WORKDIR /home/$APP_NAME
 COPY ./venders ./venders
 COPY ./models ./models

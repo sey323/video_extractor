@@ -1,18 +1,18 @@
 version: '2'
 services:
-  venom:
+  video-yolo:
     build: .
-    container_name: venom
+    container_name: video-yolo
     ports:
       - "3000:3000"
     volumes:
-      - ./resources:/home/venom/resources
-      - ./results:/home/venom/results
+      - ./resources:/home/video-yolo/resources
+      - ./results:/home/video-yolo/results
 
-  angelo:
-    build: ./angelo/.
-    container_name: angelo
+  slack-client:
+    build: ./slack-client/.
+    container_name: slack-client
     links:
-      - "venom"
+      - "video-yolo"
     volumes:
-      - ./results:/home/angelo/results
+      - ./results:/home/slack-client/results
