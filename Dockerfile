@@ -1,11 +1,11 @@
-FROM python:3.6
+FROM python:3.6-slim-stretch
 
 # opencv-devのインストール
-RUN apt-get update -y && apt-get install -y libopencv-dev \
+RUN apt-get update -y && apt-get install -y git libopencv-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# 関連ライブラリのインストール
+# ライブラリのインストール
 COPY requirements.txt .
 RUN pip install --upgrade pip \
     && pip install -r requirements.txt
@@ -19,7 +19,6 @@ RUN mkdir -p ~/tmp && cd ~/tmp \
 # 実行環境の準備
 ENV APP_NAME video-yolo
 WORKDIR /home/$APP_NAME
-COPY ./venders ./venders
 COPY ./models ./models
 COPY ./src ./src
 COPY main.py .
