@@ -49,6 +49,23 @@ class MovieIter(object):
         fps = self.org.get(cv2.CAP_PROP_FPS)
         return int(self.framecnt / fps)
 
+    def get_size(self) -> (int, int):
+        """動画の解像度を返す
+
+        Returns:
+            (int, int):　(w, h)
+        """
+        return (int(self.org.get(cv2.CAP_PROP_FRAME_WIDTH)), int(self.org.get(cv2.CAP_PROP_FRAME_HEIGHT)))
+
+    def get_fps(self) -> float:
+        """動画のFpsを返す
+
+        Returns:
+            [type]: [description]
+        """
+        return self.org.get(cv2.CAP_PROP_FPS)
+
+
     def youtube_downloader(self, url, save_path):
         """
         YouTubeからダウンロードする
