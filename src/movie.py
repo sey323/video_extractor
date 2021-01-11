@@ -5,11 +5,12 @@ from pytube import YouTube
 
 
 class MovieIter(object):
-    '''
+    """
     Youtubeから動画をダウンロードし、フレームごとの画像を返す。
-    '''
+    """
+
     def __init__(self, moviefile, size=None, inter_method=cv2.INTER_AREA):
-        save_root_path = './resources'
+        save_root_path = "./resources"
         if not os.path.exists(save_root_path):
             os.makedirs(save_root_path)
         if os.path.isfile(moviefile):  # mp4ファイルが存在するとき
@@ -42,10 +43,13 @@ class MovieIter(object):
     def __del__(self):  # anyway it works without destructor
         self.org.release()
 
-    def get_time(self):
+    def get_time(self) -> int:
+        """fpsから計算し、現在の動画の秒数を計算する．
+
+        Returns:
+            int: 動画の現在の秒数
         """
-        fpsから現在の動画の秒数を計算する．
-        """
+
         fps = self.org.get(cv2.CAP_PROP_FPS)
         return int(self.framecnt / fps)
 
@@ -55,34 +59,41 @@ class MovieIter(object):
         Returns:
             (int, int):　(w, h)
         """
-        return (int(self.org.get(cv2.CAP_PROP_FRAME_WIDTH)), int(self.org.get(cv2.CAP_PROP_FRAME_HEIGHT)))
+        return (
+            int(self.org.get(cv2.CAP_PROP_FRAME_WIDTH)),
+            int(self.org.get(cv2.CAP_PROP_FRAME_HEIGHT)),
+        )
 
     def get_fps(self) -> float:
         """動画のFpsを返す
 
         Returns:
-            [type]: [description]
+            float: fps
         """
         return self.org.get(cv2.CAP_PROP_FPS)
 
+    def youtube_downloader(self, url: str, save_path: str):
+        """YouTubeからダウンロードする
 
-    def youtube_downloader(self, url, save_path):
-        """
-        YouTubeからダウンロードする
-        ------
-        Parameters
-            url:動画のURL
+        Args:
+            url (str): 読み込む動画のURL
+            save_path (str): ダウンロードした動画を保存するパス
         """
         yt = YouTube(url)
         try:
             yt.streams.get_by_itag(137).download(save_path)
         except AttributeError:
-            yt.streams.get_by_itag(22).download(save_path)
+            yt.streams.get_highest_resolution().download(save_path)
         return yt.title
 
-    def get_latest_modified_file_path(self, dirname):
-        """
-        ディレクトリ内で最新に更新されたファイルを得る．
+    def get_latest_modified_file_path(self, dirname: str) -> str:
+        """ディレクトリ内で最新に更新されたファイルを得る．
+
+        Args:
+            dirname (str): 検索対象のディレクトリ
+
+        Returns:
+            str: 検索結果のファイルのフルパス
         """
         target = os.path.join(dirname, "*")
         files = [(f, os.path.getmtime(f)) for f in glob(target)]
